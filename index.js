@@ -94,7 +94,12 @@ function removeTask(taskName, callback) {
 function displayTasks(callback) {
     db.query("SELECT * from tasks", (err, results) => {
         if (err) return console.error(err);
-        return callback(results);
+        if (results.length > 0) {
+            callback(results);
+        } else {
+            console.log('[INFO] You haven\'t task on list\n');
+            main();
+        }
     });
 }
 
